@@ -1,8 +1,16 @@
 ﻿#include "searchEngine.h"
 
-
-int main()
+int main(int argc, char **argv)
 {
-	std::cout << "Hello CMake." << std::endl;
-	return 0;
+	auto convJSON = ConverterJSON();
+
+
+	auto dataFiles = convJSON.getTextDocuments();
+
+	for (auto &el : dataFiles)
+		std::cout << el << std::endl;
+
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 }
+
