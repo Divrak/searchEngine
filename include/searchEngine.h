@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <iostream>
+#include <algorithm>
 #include <nlohmann/json.hpp>
 #include "searchEngine.h"
 #include "InvertedIndex.h"

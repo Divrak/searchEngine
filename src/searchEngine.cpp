@@ -2,12 +2,11 @@
 
 int main(int argc, char **argv)
 {
-	auto convJSON = ConverterJSON();
+	ConverterJSON conv = ConverterJSON();
 
+	auto req = conv.getRequests();
 
-	auto dataFiles = convJSON.getTextDocuments();
-
-	for (auto &el : dataFiles)
+	for (auto &el : req)
 		std::cout << el << std::endl;
 
 	::testing::InitGoogleTest(&argc, argv);

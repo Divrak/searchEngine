@@ -36,6 +36,10 @@ file(
 	COPY ${CMAKE_SOURCE_DIR}/resources
 	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
 )
+file(
+	COPY ${CMAKE_SOURCE_DIR}/requests.json
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
+)
 add_executable (searchEngine ${SRC} ${TESTS} ${HDRS})
 target_include_directories(searchEngine PUBLIC ${INC_PATH} ${TEST_PATH})
 
