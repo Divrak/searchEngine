@@ -9,7 +9,7 @@ set(TEST_PATH ${CMAKE_SOURCE_DIR}/tests)
 
 set(SRC ${SRC_PATH}/searchEngine.cpp ${SRC_PATH}/ConverterJSON.cpp ${SRC_PATH}/invertedIndex.cpp)
 set(HDRS ${INC_PATH}/searchEngine.h ${INC_PATH}/ConverterJSON.h ${INC_PATH}/invertedIndex.h)
-set(TESTS)
+set(TESTS ${TEST_PATH}/testConverterJSON.h)
 
 include(FetchContent)
 
@@ -32,14 +32,18 @@ include(FetchContent)
 	enable_testing()
 	#end region
 
-file(
-	COPY ${CMAKE_SOURCE_DIR}/resources
-	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-)
-file(
-	COPY ${CMAKE_SOURCE_DIR}/requests.json
-	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-)
+file(COPY ${CMAKE_SOURCE_DIR}/resources
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+file(COPY ${CMAKE_SOURCE_DIR}/requests.json
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+file(COPY ${CMAKE_SOURCE_DIR}/config.json
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+file(COPY ${CMAKE_SOURCE_DIR}/answer.json
+	DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 add_executable (searchEngine ${SRC} ${TESTS} ${HDRS})
 target_include_directories(searchEngine PUBLIC ${INC_PATH} ${TEST_PATH})
 

@@ -6,8 +6,13 @@ int main(int argc, char **argv)
 
 	auto req = conv.getRequests();
 
-	for (auto &el : req)
-		std::cout << el << std::endl;
+	try {
+		conv.getResponsesLimit();
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

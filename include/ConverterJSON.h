@@ -3,6 +3,7 @@
 #include <fstream>
 #include <filesystem>
 #include <nlohmann/json.hpp>
+#include <exception>
 
 class ConverterJSON
 {
