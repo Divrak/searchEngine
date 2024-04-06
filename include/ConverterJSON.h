@@ -19,5 +19,5 @@ public:
     std::vector<std::string> getRequests();
 
     //put results search requests on file answers.json
-    void putAnswer(std::vector<std::vector<std::pair<int, float>>> answer);
+    void putAnswer(std::vector<std::vector<std::pair<int, float>>>);
 };

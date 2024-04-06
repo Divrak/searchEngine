@@ -21,7 +21,7 @@ std::vector<std::string> ConverterJSON::getTextDocuments()
 		}
 	}
 	else
-		throw std::runtime_error("files in directory ./resources/ not exists");
+		std::cout << "files in directory ./resources/ not exists";
 	
 	//3) return 
 	return filesData;
@@ -42,7 +42,7 @@ int ConverterJSON::getResponsesLimit()
 		configStream.close();
 	}
 	else 
-		throw std::runtime_error("file config.json not exists");
+		std::cout << "file config.json not exists";
 
 	//3) return maxResponse
 	return jsonConfig["config"]["maxResponses"];
@@ -70,11 +70,11 @@ std::vector<std::string> ConverterJSON::getRequests()
 			requests.push_back(v);
 	}
 	else
-		throw std::runtime_error("file requests.json not exists");
+		std::cout << "file requests.json not exists";
 	//3) return
 	return requests;
 }
 
-void ConverterJSON::putAnswer(std::vector<std::vector<std::pair<int, float>>> answer)
+void ConverterJSON::putAnswer(std::vector<std::vector<std::pair<int, float>>> inAnswer)
 {
 }

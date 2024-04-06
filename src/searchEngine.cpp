@@ -2,17 +2,12 @@
 
 int main(int argc, char **argv)
 {
-	ConverterJSON conv = ConverterJSON();
+	InvertedIndex inv;
+	ConverterJSON conv;
 
-	auto req = conv.getRequests();
-
-	try {
-		conv.getResponsesLimit();
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	auto texts = conv.getTextDocuments();
+	inv.updateDocumentBase(texts);
+	inv.reindex();
 
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
