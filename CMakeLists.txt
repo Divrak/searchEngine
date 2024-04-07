@@ -9,7 +9,7 @@ set(TEST_PATH ${CMAKE_SOURCE_DIR}/tests)
 
 set(SRC ${SRC_PATH}/searchEngine.cpp ${SRC_PATH}/ConverterJSON.cpp ${SRC_PATH}/invertedIndex.cpp)
 set(HDRS ${INC_PATH}/searchEngine.h ${INC_PATH}/ConverterJSON.h ${INC_PATH}/invertedIndex.h)
-set(TESTS ${TEST_PATH}/testConverterJSON.h)
+set(TESTS ${TEST_PATH}/testConverterJSON.h ${TEST_PATH}/testInvertedIndex.h)
 
 include(FetchContent)
 

@@ -5,10 +5,7 @@
     "reindexFrequencyHour": 1,
     "maxResponses":  5
   },
-  "files": [
-    "../resources/001.txt",
-    "../resources/002.txt",
-    "../resources/003.txt",
-    "../resources/004.txt"
+  "directoryFiles": [
+    "./resources"
   ]
 }

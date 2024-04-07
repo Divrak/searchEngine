@@ -7,9 +7,14 @@ void InvertedIndex::updateDocumentBase(std::vector<std::string> inInputDocs)
 }
 
 //method determine quantity match by word in loaded documents base
-std::vector<Entry> InvertedIndex::getWordCount(const std::string &inWord) const
+std::vector<Entry> InvertedIndex::getWordCount(const std::string &inWord)
 {
-	return std::vector<Entry>();
+	if(!freqDictionary.size())
+		reindex();
+	if (freqDictionary.contains(inWord))
+		return freqDictionary.find(inWord)->second;
+	else
+		return std::vector<Entry>();
 }
 
 //Fill freqDictionary
@@ -17,7 +22,7 @@ void InvertedIndex::reindex()
 {
 	//Split text by words
 	char *token {nullptr};
-	const char *delimiters = " ,.-?!()#[]<>{};*=";
+	const char *delimiters = " ,.-?!()#[]<>{};*=\n\t+/: –—”…«»";
 	char *currentWord {nullptr};
 
 	for (size_t i {}; i < docs.size(); ++i)

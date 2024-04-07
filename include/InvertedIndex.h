@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <map>
@@ -23,7 +24,7 @@ public:
 	void updateDocumentBase(std::vector<std::string>);
 
 	//method determine quantity match by word in loaded documents base
-	std::vector<Entry> getWordCount(const std::string &) const;
+	std::vector<Entry> getWordCount(const std::string &);
 
 	//Fill freqDictionary
 	void reindex();

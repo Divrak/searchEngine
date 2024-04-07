@@ -1,55 +1,45 @@
 #include <ConverterJSON.h>
 
-std::vector<std::string> ConverterJSON::getTextDocuments()
+std::vector<std::string> ConverterJSON::getTextDocuments() const
 {
+	//variables
+	auto jsonConfig = getConfig();
 	std::vector<std::string> filesData;
-	//1) Open files
-	std::filesystem::path filePath("resources\\001.txt");
+	std::vector<std::filesystem::path> resourceDir();
 
-	if (std::filesystem::exists(filePath))
-	{//if file exists, 
-		std::ifstream fileStream;
-		for (auto &p : std::filesystem::directory_iterator(filePath.parent_path()))
-		{//iterate all files in the resources directory 
-			//put all file contents of the file into std::string
-			fileStream.open(p, std::ios_base::in);
-			std::string buffer {std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>()};
-			fileStream.close();
+	//Open directories and read files
+	for (auto &[k, v] : jsonConfig["directoryFiles"].begin()->items())
+	{
+		if (std::filesystem::exists(v))
+		{//if directory exists, 
+			std::ifstream fileStream;
+			for (auto &p : std::filesystem::directory_iterator(v))
+			{//iterate all files in the resources directory 
+				//put all file contents of the file into std::string
+				fileStream.open(p, std::ios_base::in);
+				std::string buffer {std::istreambuf_iterator<char>(fileStream), std::istreambuf_iterator<char>()};
+				fileStream.close();
 
-			//2) put content into vector
-			filesData.push_back(buffer);
+				//2) put content into vector
+				filesData.push_back(buffer);
+			}
 		}
+		else
+			std::cout << "files in directory " << v << " not exists";
 	}
-	else
-		std::cout << "files in directory ./resources/ not exists";
-	
-	//3) return 
 	return filesData;
 }
 
-int ConverterJSON::getResponsesLimit()
+int ConverterJSON::getResponsesLimit() const
 {
-	//1) open file confing.json
-	nlohmann::json jsonConfig;
-	std::filesystem::path configPath("config.json");
-	std::ifstream configStream;
+	auto jsonConfig = getConfig();
 
-	if (std::filesystem::exists(configPath))
-	{//if file exists
-		//2) read file config into jsonConfig variable
-		configStream.open(configPath);
-		jsonConfig << configStream;
-		configStream.close();
-	}
-	else 
-		std::cout << "file config.json not exists";
-
-	//3) return maxResponse
+	//return maxResponse
 	return jsonConfig["config"]["maxResponses"];
 }
 
 //Get requests list from requests.json
-std::vector<std::string> ConverterJSON::getRequests()
+std::vector<std::string> ConverterJSON::getRequests() const
 {
 	nlohmann::json jsonRequests;
 	std::vector<std::string> requests;
@@ -75,6 +65,25 @@ std::vector<std::string> ConverterJSON::getRequests()
 	return requests;
 }
 
-void ConverterJSON::putAnswer(std::vector<std::vector<std::pair<int, float>>> inAnswer)
+void ConverterJSON::putAnswer(std::vector<std::vector<std::pair<int, float>>> inAnswer) const
 {
+}
+
+nlohmann::json ConverterJSON::getConfig() const
+{
+	//1) Open file confing.json
+	nlohmann::json jsonConfig;
+	std::filesystem::path configPath("config.json");
+	std::ifstream configStream;
+
+	if (std::filesystem::exists(configPath))
+	{//if file exists
+		//2) read file config into jsonConfig variable
+		configStream.open(configPath);
+		jsonConfig << configStream;
+		configStream.close();
+	}
+	else 
+		std::cout << "file config.json not exists";
+	return jsonConfig;
 }

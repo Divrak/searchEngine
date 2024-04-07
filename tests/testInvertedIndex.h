@@ -1,5 +1,6 @@
-#include "gtest/gtest.h"
+#pragma once
 #include "InvertedIndex.h"
+#include "gtest/gtest.h"
 
 void TestInvertedIndexFunctionality(const std::vector<std::string> &docs,
 									const std::vector<std::string> &requests,
@@ -44,7 +45,7 @@ TEST(TestCaseInvertedIndex, TestBasic2)
 	const std::vector<std::string> requests = {"milk", "water", "cappuccino"};
 	const std::vector<std::vector<Entry>> expected = {
 		{{0,4}, {1,1}, {2,5}},
-		{{0,2}, {1,2}, {2,5}},
+		{{0,3}, {1,2}, {2,5}},
 		{{3,1}}
 	};
 	TestInvertedIndexFunctionality(docs, requests, expected);
@@ -55,8 +56,7 @@ TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord) {
 		"statement"
 	};
 	const std::vector<std::string> requests = {"m", "statement"};
-	const std::vector<std::vector<Entry>> expected = {
-	{ {{1,1}} };
+	const std::vector<std::vector<Entry>> expected = { {}, {{1, 1}} };
 	TestInvertedIndexFunctionality(docs, requests, expected);
 }
 
