@@ -50,6 +50,7 @@ TEST(TestCaseInvertedIndex, TestBasic2)
 	};
 	TestInvertedIndexFunctionality(docs, requests, expected);
 }
+
 TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord) {
 	const std::vector<std::string> docs = {
 		"a b c d e f g h i j k l",
