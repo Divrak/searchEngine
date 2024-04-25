@@ -4,6 +4,7 @@
 #include <vector>
 #include <chrono>
 #include <algorithm>
+#include <Windows.h>
 #include <nlohmann/json.hpp>
 #include <ctime>
 #include <gtest/gtest.h>
