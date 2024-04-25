@@ -5,9 +5,8 @@
 #include <chrono>
 #include <algorithm>
 #include <nlohmann/json.hpp>
+#include <ctime>
 #include <gtest/gtest.h>
 #include "ConverterJSON.h"
 #include "InvertedIndex.h"
-#include "testInvertedIndex.h"
-#include "testConverterJSON.h"
 
