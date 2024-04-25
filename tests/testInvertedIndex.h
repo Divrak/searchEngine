@@ -16,6 +16,14 @@ void TestInvertedIndexFunctionality(const std::vector<std::string> &docs,
 		std::vector<Entry> wordCount = idx.getWordCount(request);
 		result.push_back(wordCount);
 	}
+	for (auto &el : result)
+	{
+		for (auto &e : el)
+		{
+			std::cout << "{ " << e.docID << ": " << e.count << " }";
+		}
+		std::cout << std::endl;
+	}
 
 	ASSERT_EQ(result, expected);
 }

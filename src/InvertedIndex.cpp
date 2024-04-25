@@ -39,10 +39,12 @@ void InvertedIndex::reindex(const std::string &inDoc, size_t inDocID)
 	//Traversing words from a file
 	while (currentWord != nullptr)
 	{
+		guardFreqDictionary.lock();
 		if (freqDictionary.contains(currentWord))
 		{//If word already exists into freqDictionary
 
 			auto currentElement = freqDictionary.find(currentWord);
+
 			//If word into current document not exists, create entry; else increment current entry counter
 			if (currentElement->second.rbegin()->docID == inDocID)
 				++currentElement->second.rbegin()->count;
@@ -53,8 +55,8 @@ void InvertedIndex::reindex(const std::string &inDoc, size_t inDocID)
 		{
 			freqDictionary.insert(std::make_pair(currentWord, std::vector<Entry>{{inDocID, 1}}));
 		}
-
 		currentWord = strtok_s(nullptr, delimiters, &token);
+		guardFreqDictionary.unlock();
 	}
 }
 

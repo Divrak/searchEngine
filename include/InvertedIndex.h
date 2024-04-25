@@ -21,9 +21,6 @@ class InvertedIndex
 	std::map<std::string, std::vector<Entry>> freqDictionary{}; //Store the frequency of match of words
 	std::vector<std::thread> threads;
 	mutable std::mutex guardFreqDictionary;
-	mutable std::mutex guardDocs;
-	mutable std::mutex guardIndex;
-	mutable std::mutex guardConsole;
 public:
 	InvertedIndex() = default;
 
