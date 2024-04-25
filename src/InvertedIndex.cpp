@@ -9,10 +9,14 @@ void InvertedIndex::updateDocumentBase(std::vector<std::string> inInputDocs)
 	std::vector<std::thread> threads;
 	freqDictionary.clear();
 	for (int i {}; i < docs.size(); ++i)
+	{//ÅÑËÈ ÍÅ ÑÒÀÂÈÒÜ ÔÈÃÓÐÍÛÅ ÑÊÎÁÊÈ ÇÄÅÑÜ ÏÐÎÈÑÕÎÄÈÒ ÊÀÊÀß-ÒÎ ÄÈÈÈÈ×!!!!
 		threads.push_back(std::thread(&InvertedIndex::reindex, this, std::ref(docs[i]), i));
+	}
 
 	for (auto &thread : threads)
+	{
 		thread.join();
+	}
 }
 
 //method determine quantity match by word in loaded documents base
@@ -40,6 +44,7 @@ void InvertedIndex::reindex(const std::string &inDoc, size_t inDocID)
 	while (currentWord != nullptr)
 	{
 		guardFreqDictionary.lock();
+
 		if (freqDictionary.contains(currentWord))
 		{//If word already exists into freqDictionary
 
@@ -48,24 +53,15 @@ void InvertedIndex::reindex(const std::string &inDoc, size_t inDocID)
 			//If word into current document not exists, create entry; else increment current entry counter
 			if (currentElement->second.rbegin()->docID == inDocID)
 				++currentElement->second.rbegin()->count;
-			else
+			else 
+			//create new
 				currentElement->second.push_back({inDocID, 1});
 		}
 		else
-		{
 			freqDictionary.insert(std::make_pair(currentWord, std::vector<Entry>{{inDocID, 1}}));
-		}
 		currentWord = strtok_s(nullptr, delimiters, &token);
+
 		guardFreqDictionary.unlock();
 	}
+
 }
-
-std::map<std::string, std::vector<Entry>> InvertedIndex::getFreqDictionary() const
-{ return freqDictionary; }
-
-std::vector<std::string> InvertedIndex::getDocs() const
-{ return docs; }
-
-void InvertedIndex::setDocs(std::vector<std::string> inDocs)
-{ docs = inDocs; }
-

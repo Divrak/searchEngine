@@ -16,6 +16,16 @@ void TestInvertedIndexFunctionality(const std::vector<std::string> &docs,
 		std::vector<Entry> wordCount = idx.getWordCount(request);
 		result.push_back(wordCount);
 	}
+
+	//sort element by docID
+	for (auto &el : result)
+	{
+		std::sort(el.begin(), el.end(), [](const Entry &inLeft, const Entry &inRight) {
+			return inLeft.docID < inRight.docID;
+		});
+	}
+
+	//console log
 	for (auto &el : result)
 	{
 		for (auto &e : el)

@@ -32,10 +32,4 @@ public:
 
 	//Fill freqDictionary
 	void reindex(const std::string &, size_t);
-
-	std::map<std::string, std::vector<Entry>> getFreqDictionary() const;
-
-	std::vector<std::string> getDocs() const;
-
-	void setDocs(std::vector<std::string> inDocs);
 };
